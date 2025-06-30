@@ -38,7 +38,7 @@ dnf module enable nodejs:18 -y &>> $LOGFILE
 
 VALIDATE $? "Enabling NodeJS:18 Version"
 
-dnf install nodejs -y 
+dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing NodeJS "
 
@@ -71,15 +71,15 @@ cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.s
 
 VALIDATE $? "Coping Catalogue service file"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE
 
 VALIDATE $? "Catalogue Demon reload"
 
-systemctl enable catalogue
+systemctl enable catalogue &>> $LOGFILE
 
 VALIDATE $? "Enable Catalogue"
 
-systemctl start catalogue
+systemctl start catalogue &>> $LOGFILE
 
 VALIDATE $? "Start Catalogue"
 
@@ -87,10 +87,10 @@ cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? "Copying mongodb repo"
 
-dnf install mongodb-org-shell -y
+dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? " Installing Mongodb Client"
 
-mongo --host $MONGODB_HOST </app/schema/catalogue.js
+mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
 
 VALIDATE $? " Loading Catalogue data into Mongodb"
