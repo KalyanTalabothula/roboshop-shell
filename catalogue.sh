@@ -42,11 +42,20 @@ dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing NodeJS "
 
+id roboshop
+if [ $? -ne 0 ]
+then 
+    useradd roboshop
+    VALIDATE $? "roboshop user creation"
+else
+    echo -e "roboshop user already exist $Y SKIPPING $N"
+fi
+
 useradd roboshop &>> $LOGFILE
 
 VALIDATE $? "creating Roboshop User"
 
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
 
 VALIDATE $? "Creating APP directory"
 
@@ -58,7 +67,7 @@ cd /app &>> $LOGFILE
 
 VALIDATE $? "Change Directory to Application"
 
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 
 VALIDATE $? "Unziping Catalogue"
 
