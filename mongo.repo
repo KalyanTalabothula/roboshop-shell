@@ -1,4 +1,3 @@
-#!/binbash
 
 [mongodb-org-4.2]
 name=MongoDB Repository
