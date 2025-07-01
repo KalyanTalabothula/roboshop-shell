@@ -70,10 +70,10 @@ VALIDATE $? " Copying user service file "
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? " User daemon-reload "
 
-systemctl enable &>> $LOGFILE
+systemctl enable user &>> $LOGFILE
 VALIDATE $? " Enable User "
 
-systemctl start &>> $LOGFILE
+systemctl start user &>> $LOGFILE
 VALIDATE $? " Start User "
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
