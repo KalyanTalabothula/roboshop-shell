@@ -1,14 +1,14 @@
-
 [Unit]
-Description = User Service
+Description=User Service
+After=network.target
+
 [Service]
 User=roboshop
 Environment=MONGO=true
-// highlight-start
-Environment=REDIS_URL='redis://redis.kalyanu.xyz:6379'
-Environment=MONGO_URL="mongodb://mongodb.kalyanu.xyz:27017/users"
-// highlight-end
+Environment=REDIS_URL=redis://redis.kalyanu.xyz:6379
+Environment=MONGO_URL=mongodb://mongodb.kalyanu.xyz:27017/users
 ExecStart=/bin/node /app/server.js
+Restart=always
 SyslogIdentifier=user
 
 [Install]
