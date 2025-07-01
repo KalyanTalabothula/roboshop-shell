@@ -42,7 +42,7 @@ dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing NodeJS "
 
-id roboshop
+id roboshop # if roboshop does not exit then it failure, I mean set -e petti unte inka mundu velladu
 if [ $? -ne 0 ]
 then 
     useradd roboshop
