@@ -31,15 +31,12 @@ else
 fi 
 
 dnf module disable nodejs -y &>> $LOGFILE
-
 VALIDATE $? "Disabling current NodeJS Version"
 
-dnf module enable nodejs:18 -y &>> $LOGFILE
-
-VALIDATE $? "Enabling NodeJS:18 Version"
+dnf module enable nodejs:20 -y &>> $LOGFILE
+VALIDATE $? "Enabling NodeJS:20 Version"
 
 dnf install nodejs -y &>> $LOGFILE
-
 VALIDATE $? "Installing NodeJS "
 
 id roboshop # if roboshop does not exit then it failure, I mean set -e petti unte inka mundu velladu

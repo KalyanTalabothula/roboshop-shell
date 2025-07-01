@@ -1,14 +1,11 @@
 [Unit]
-Description=User Service
-After=network.target
-
+Description = User Service
 [Service]
 User=roboshop
 Environment=MONGO=true
-Environment=REDIS_URL=redis://redis.kalyanu.xyz:6379
-Environment=MONGO_URL=mongodb://mongodb.kalyanu.xyz:27017/users
+Environment=REDIS_HOST=<REDIS-SERVER-IP>
+Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IP-ADDRESS>:27017/users"
 ExecStart=/bin/node /app/server.js
-Restart=always
 SyslogIdentifier=user
 
 [Install]
