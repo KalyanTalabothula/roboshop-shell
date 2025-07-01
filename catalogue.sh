@@ -52,50 +52,38 @@ else
 fi
 
 mkdir -p /app &>> $LOGFILE
-
 VALIDATE $? "Creating APP directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
-
 VALIDATE $? "Downloading Catalogue application "
 
 cd /app &>> $LOGFILE
-
 VALIDATE $? "Change Directory to Application"
 
 unzip -o /tmp/catalogue.zip &>> $LOGFILE
-
 VALIDATE $? "Unziping Catalogue"
 
 npm install &>> $LOGFILE
-
 VALIDATE $? "Installing Dependences"
 
 # use absolute, because catalogue.service exists there
 cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
-
 VALIDATE $? "Coping Catalogue service file"
 
 systemctl daemon-reload &>> $LOGFILE
-
 VALIDATE $? "Catalogue Demon reload"
 
 systemctl enable catalogue &>> $LOGFILE
-
 VALIDATE $? "Enable Catalogue"
 
 systemctl start catalogue &>> $LOGFILE
-
 VALIDATE $? "Start Catalogue"
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-
 VALIDATE $? "Copying mongodb repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
-
 VALIDATE $? " Installing Mongodb Client"
 
 mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
-
 VALIDATE $? " Loading Catalogue data into Mongodb"
