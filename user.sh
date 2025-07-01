@@ -68,19 +68,19 @@ cp /home/centos/roboshop-shell/user.service /etc/systemd/system/user.service
 VALIDATE $? "Coping user service file"
 
 systemctl daemon-reload &>> $LOGFILE
-VALIDATE $? " user Demon reload"
+VALIDATE $? " user Demon reload "
 
 systemctl enable user &>> $LOGFILE
-VALIDATE $? "Enable user"
+VALIDATE $? " Enable user "
 
 systemctl start user &>> $LOGFILE
-VALIDATE $? "Start user"
+VALIDATE $? " Start user "
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-VALIDATE $? "Copying mongodb repo"
+VALIDATE $? " Copying mongodb repo "
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
-VALIDATE $? " Installing Mongodb Client"
+VALIDATE $? " Installing Mongodb Client "
 
 mongo --host $MONGODB_HOST </app/schema/user.js &>> $LOGFILE
-VALIDATE $? " Loading user data into Mongodb"
+VALIDATE $? " Loading user data into Mongodb "
