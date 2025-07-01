@@ -34,8 +34,8 @@ fi
 dnf module disable nodejs -y &>> $LOGFILE
 VALIDATE $? "Disabling current version"
 
-dnf module enable nodejs:18 -y &>> $LOGFILE
-VALIDATE $? "Enabling Nodejs:18 version"
+dnf module enable nodejs:20 -y &>> $LOGFILE
+VALIDATE $? "Enabling Nodejs:20 version"
 
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? " Installing Nodejs "
@@ -52,10 +52,11 @@ fi
 mkdir -p /app
 VALIDATE $? " Creating app directory "
 
-curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip  &>> $LOGFILE
 VALIDATE $? " Downloading user application "
 
 cd /app 
+
 unzip -o /tmp/user.zip &>> $LOGFILE 
 VALIDATE $? " Unzipping user "
 
