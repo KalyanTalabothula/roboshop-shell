@@ -29,11 +29,11 @@ else
     echo "you are root user"
 fi
 
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y&>> $LOGFILE
-VALIDATE $? " Installing Remi release "
+dnf module disable redis -y &>> $LOGFILE
+VALIDATE $? " Disabling redis default version number 6 "
 
-dnf module enable redis:remi-6.2 -y &>> $LOGFILE
-VALIDATE $? " Enabling redis "
+dnf module enable redis:7 -y -y &>> $LOGFILE
+VALIDATE $? " Enabling redis version 7 "
 
 dnf install redis -y &>> $LOGFILE
 VALIDATE $? " Installing redis "
