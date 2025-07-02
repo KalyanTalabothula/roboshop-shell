@@ -76,7 +76,7 @@ dnf install mysql -y &>> $LOGFILE
 VALIDATE $? " Installing mysql client "
 
 mysql -h mysql.kalyanu.xyz -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
-VALIDATE $? " loding shipping data & creating user and password not to use root "
+VALIDATE $? " loading shipping data & creating user and password not to use root "
 
 systemctl restart shipping &>> $LOGFILE
 VALIDATE $? " Restarting shipping "
