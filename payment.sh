@@ -31,23 +31,23 @@ else
 fi 
 
 
-dnf install python3 gcc python3-devel -y
+dnf install python3 gcc python3-devel -y &>> $LOGFILE
 
-mkdir -p /app 
+mkdir -p /app &>> $LOGFILE
 
-curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip
+curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>> $LOGFILE
 
-cd /app 
+cd /app  &>> $LOGFILE
 
-unzip -o /tmp/payment.zip
+unzip -o /tmp/payment.zip &>> $LOGFILE
 
 
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt &>> $LOGFILE
 
-vim /etc/systemd/system/payment.service
+vim /etc/systemd/system/payment.service &>> $LOGFILE
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE
 
-systemctl enable payment 
+systemctl enable payment &>> $LOGFILE
 
-systemctl start payment
+systemctl start payment &>> $LOGFILE
