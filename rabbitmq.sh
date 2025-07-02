@@ -5,7 +5,6 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGODB_HOST=mongodb.kalyanu.xyz
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -30,14 +29,16 @@ else
     echo -e " You are a root user "
 fi
 
-dnf install mysql-server -y  &>> $LOGFILE
-VALIDATE $? "Installing mysql-server"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>> $LOGFILE
 
-systemctl enable mysqld  &>> $LOGFILE
-VALIDATE $? "Enable mysql server"
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash 
+&>> $LOGFILE
+dnf install rabbitmq-server -y &>> $LOGFILE
 
-systemctl start mysqld &>> $LOGFILE
-VALIDATE $? "Starting mysql server "
+systemctl enable rabbitmq-server &>> $LOGFILE
 
-mysql_secure_installation --set-root-pass RoboShop@1
-VALIDATE $? "Setting mysql root password "
+systemctl start rabbitmq-server &>> $LOGFILE
+
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
+
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
