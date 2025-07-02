@@ -60,6 +60,9 @@ VALIDATE $? " mvn clean packages "
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? ""
 
+cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? ""
+
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? " daemon-reloading "
 
@@ -72,7 +75,7 @@ VALIDATE $? " Starting shipping "
 dnf install mysql -y &>> $LOGFILE
 VALIDATE $? " Installing mysql "
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
+mysql -h mysql.kalyanu.xyz -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
 VALIDATE $? " creating user and password not to use root "
 
 systemctl restart shipping &>> $LOGFILE
