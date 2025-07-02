@@ -39,5 +39,8 @@ VALIDATE $? "Enable mysql server"
 systemctl start mysqld &>> $LOGFILE
 VALIDATE $? "Starting mysql server "
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" &>> $LOGFILE
+mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGFILE
 VALIDATE $? "Setting mysql root password "
+
+mysql -uroot -pRoboShop@1 &>> $LOGFILE
+VALIDATE $? " To check new password is working or not "
