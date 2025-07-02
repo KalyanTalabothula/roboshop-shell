@@ -52,32 +52,31 @@ cd /app &>> $LOGFILE
 VALIDATE $? "Changing to app directory"
 
 unzip -o /tmp/shipping.zip 
-VALIDATE $? "Unzipping dependencies"
+VALIDATE $? "Unzipping shipping"
 
 mvn clean package &>> $LOGFILE
-VALIDATE $? " mvn clean packages "
+VALIDATE $? " Installing Dependencies"
 
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
-VALIDATE $? ""
-
+VALIDATE $? "renaming jar file"
 
 cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
-
+VALIDATE $? " copying shipping service "
 
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? " daemon-reloading "
 
 systemctl enable shipping &>> $LOGFILE
-VALIDATE $? " Enabling shipping "
+VALIDATE $? " Enable shipping "
 
 systemctl start shipping &>> $LOGFILE
 VALIDATE $? " Starting shipping "
 
 dnf install mysql -y &>> $LOGFILE
-VALIDATE $? " Installing mysql "
+VALIDATE $? " Installing mysql client "
 
 mysql -h mysql.kalyanu.xyz -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOGFILE
-VALIDATE $? " creating user and password not to use root "
+VALIDATE $? " loding shipping data & creating user and password not to use root "
 
 systemctl restart shipping &>> $LOGFILE
 VALIDATE $? " Restarting shipping "
