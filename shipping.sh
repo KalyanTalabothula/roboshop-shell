@@ -45,7 +45,7 @@ fi
 mkdir -p /app &>> $LOGFILE
 VALIDATE $? "Creating APP directory"
 
-curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>> $LOGFILE
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> $LOGFILE
 VALIDATE $? " Downloading shopping application "
 
 cd /app &>> $LOGFILE
