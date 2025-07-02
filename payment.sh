@@ -39,7 +39,7 @@ curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip
 
 cd /app 
 
-unzip /tmp/payment.zip
+unzip -o /tmp/payment.zip
 
 
 pip3 install -r requirements.txt
