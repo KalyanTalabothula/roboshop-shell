@@ -51,7 +51,7 @@ VALIDATE $? " Downloading shopping application "
 cd /app &>> $LOGFILE
 VALIDATE $? "Changing to app directory"
 
-unzip -o /tmp/shipping.zip 
+unzip -o /tmp/shipping.zip &>> $LOGFILE
 VALIDATE $? "Unzipping shipping"
 
 mvn clean package &>> $LOGFILE
