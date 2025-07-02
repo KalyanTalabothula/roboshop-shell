@@ -32,22 +32,31 @@ fi
 
 
 dnf install python3 gcc python3-devel -y &>> $LOGFILE
+VALIDATE
 
 mkdir -p /app &>> $LOGFILE
+VALIDATE $? "Creating app directory"
 
 curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>> $LOGFILE
+VALIDATE $? "Downloading payment"
 
 cd /app  &>> $LOGFILE
+VALIDATE $? " Changing to app directory"
 
 unzip -o /tmp/payment.zip &>> $LOGFILE
-
+VALIDATE $? " Unzipping payment"
 
 pip3 install -r requirements.txt &>> $LOGFILE
+VALIDATE $? " Installing Dependencies"
 
-vim /etc/systemd/system/payment.service &>> $LOGFILE
+cp /home/centos/roboshop-shell/payment.service /etc/systemd/system/payment.service &>> $LOGFILE
+VALIDATE $? " Copying payment service"
 
 systemctl daemon-reload &>> $LOGFILE
+VALIDATE $? "Daemon reload"
 
 systemctl enable payment &>> $LOGFILE
+VALIDATE $? "Enabling payment"
 
 systemctl start payment &>> $LOGFILE
+VALIDATE $? " Starting payment"
