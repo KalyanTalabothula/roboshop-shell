@@ -60,8 +60,9 @@ VALIDATE $? " mvn clean packages "
 mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? ""
 
+
 cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
-VALIDATE $? ""
+
 
 systemctl daemon-reload &>> $LOGFILE
 VALIDATE $? " daemon-reloading "
