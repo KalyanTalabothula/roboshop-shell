@@ -1,10 +1,10 @@
 #!/bin/bash
 
-AMI=ami-0f3c7d07486cad139 #this keeps on changing
-SG_ID=sg-087e7afb3a936fce7 #replace with your SG ID
+AMI=ami-0b4f379183e5706b9 #this keeps on changing
+SG_ID=sg-03fb7dd41dc724cde #replace with your SG ID
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
-ZONE_ID=Z104317737D96UJVA7NEF # replace your zone ID
-DOMAIN_NAME="daws76s.online"
+ZONE_ID=Z00927541W472WAHJVTNL # replace your zone ID
+DOMAIN_NAME="kalyanu.xyz"
 
 for i in "${INSTANCES[@]}"
 do
@@ -17,7 +17,7 @@ do
 
     # follow document change AMI, Security-group-ids, then TAG and Query as well as output
 
-    IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids sg-087e7afb3a936fce7 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+    IP_ADDRESS=$(aws ec2 run-instances --image-id $AMI --instance-type $INSTANCE_TYPE --security-group-ids sg-03fb7dd41dc724cde --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
     echo "$i: $IP_ADDRESS"
 
     #create R53 record, make sure you delete existing record
